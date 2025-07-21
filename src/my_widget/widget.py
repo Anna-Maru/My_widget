@@ -1,6 +1,7 @@
 from datetime import datetime
 from masks import get_mask_card_number, get_mask_account
 
+
 def mask_account_card(info: str) -> str:
     """ Маскирует номер банковской карты или счёта из строки, содержащей тип и номер.
     Примеры:
