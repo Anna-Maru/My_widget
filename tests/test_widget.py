@@ -1,4 +1,5 @@
-from my_widget.widget import mask_account_card, get_date
+import pytest
+from src.widget import mask_account_card, get_date
 
 
 @pytest.mark.parametrize(
@@ -7,7 +8,7 @@ from my_widget.widget import mask_account_card, get_date
         ("Visa Platinum 7000792289606361", "Visa Platinum 7000 79** **** 6361"),
         ("Maestro 1234567890123456", "Maestro 1234 56** **** 3456"),
         ("Счет 73654108430135874305", "Счет **4305"),
-        ("Счёт 0000111122223333", "Счёт 0000 11** **** 3333"),
+        ("Счёт 0000111122223333", "Счёт **3333"),
     ],
 )
 def test_mask_account_card(info, expected):
@@ -16,7 +17,6 @@ def test_mask_account_card(info, expected):
 
 def test_mask_account_card_empty_or_invalid():
     assert mask_account_card("") == ""
-    # Без пробела — весь текст считается номером → маскируем как карту
     assert mask_account_card("1234567890123456") == "1234 56** **** 3456"
 
 
