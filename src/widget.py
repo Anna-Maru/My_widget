@@ -33,7 +33,10 @@ def mask_account_card(info: str) -> str:
     else:
         masked = get_mask_card_number(number)
 
-    return f"{prefix} {masked}"
+    if prefix:
+        return f"{prefix} {masked}"
+    else:
+        return masked
 
 
 def get_date(iso_str: str) -> str:
