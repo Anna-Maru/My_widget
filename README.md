@@ -42,3 +42,28 @@ records = [
 executed = filter_by_state(records)
 sorted_ops = sort_by_date(executed)
 ```
+
+### Тесты
+1. Установите зависимости:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Запустить все тесты:
+   ```bash
+   pytest tests/ -v
+   ```
+3. Для конкретного файла:
+   ```bash
+   pytest tests/test_masks.py -v
+   ```
+   ```bash
+   pytest tests/test_widget.py -v
+   ```
+   ```bash
+   pytest tests/test_processing.py -v
+   ```
+4.  Покрытие кода (если есть)
+```bash
+pytest --cov=app tests/
+```
+**Результат**: 99% покрытия.
