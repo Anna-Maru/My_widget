@@ -15,6 +15,7 @@ isort = "^6.0.1"
 flake8 = "^7.3.0"
 mypy = "^1.16.1"
 pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
 
 
 [tool.poetry.group.lint.dependencies]
@@ -34,3 +35,7 @@ profile = "black"
 python_version = "3.8"
 ignore_missing_imports = true
 check_untyped_defs = true
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
