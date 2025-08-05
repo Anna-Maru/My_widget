@@ -42,6 +42,12 @@ records = [
 executed = filter_by_state(records)
 sorted_ops = sort_by_date(executed)
 ```
+4. Генераторы для операций и номеров карт (`filter_by_currency`, `card_number_generator`)
+```
+transactions = [...]
+for txn in filter_by_currency(transactions, "USD"):
+    print(txn)
+   ```
 
 ### Тесты
 1. Установите зависимости:
@@ -62,7 +68,10 @@ sorted_ops = sort_by_date(executed)
    ```bash
    pytest tests/test_processing.py -v
    ```
-4.  Покрытие кода (если есть)
+   ```bash
+   pytest tests/test_generators.py -v
+   ```
+5. Покрытие кода
 ```bash
 pytest --cov=app tests/
 ```
