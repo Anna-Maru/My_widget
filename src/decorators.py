@@ -36,3 +36,18 @@ def log(filename: Optional[str] = None):
 
         return wrapper
     return decorator
+
+
+def _write_log(message: str, filename: Optional[str] = None) -> None:
+    """
+        Вспомогательная функция для записи логов в файл или консоль.
+
+        Args:
+            message (str): Сообщение для логирования
+            filename (str, optional): Имя файла. Если None, выводит в консоль.
+        """
+    if filename:
+        with open(filename, 'a', encoding='utf-8') as file:
+            file.write(message + '\n')
+    else:
+        print(message)
