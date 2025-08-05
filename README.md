@@ -48,6 +48,23 @@ transactions = [...]
 for txn in filter_by_currency(transactions, "USD"):
     print(txn)
    ```
+5. Реализован декоратор log
+```
+def log(filename: str = None):
+    """Декоратор для логирования выполнения функций"""
+```
+Его функции:
+* Логирование в файл или консоль
+* Форматирование с временными метками
+* Обработка исключений
+* Сохранение оригинальной функции
+
+Пример использования: 
+```
+@log("mylog.txt")
+def my_function(x, y):
+    return x + y`
+```
 
 ### Тесты
 1. Установите зависимости:
@@ -71,7 +88,7 @@ for txn in filter_by_currency(transactions, "USD"):
    ```bash
    pytest tests/test_generators.py -v
    ```
-5. Покрытие кода
+6. Покрытие кода
 ```bash
 pytest --cov=app tests/
 ```
