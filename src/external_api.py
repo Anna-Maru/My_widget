@@ -1,10 +1,11 @@
 import os
+from typing import Any, Dict, Optional
+
 import requests
-from typing import Dict, Any, Optional
 from dotenv import load_dotenv
 
-
 load_dotenv()
+
 
 def get_exchange_rate(currency_code: str) -> Optional[float]:
     """Получает курс валюты к рублю с помощью Exchange Rates Data API."""
