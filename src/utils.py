@@ -1,20 +1,30 @@
 import json
-from pathlib import Path
-from typing import Any, List, Dict
+import os
+from typing import List, Dict, Any
 
 
-def load_transactions_from_json(path: str | Path) -> List[Dict[str, Any]]:
-    """Загружает транзакции из JSON-файла.
-        Если файл отсутствует, не читается корректно, или JSON не является списком,
-        возвращает пустой список.
-        """
+def get_data(json_path: str) -> List[Dict[str, Any]]:
+    """Загружает транзакции из JSON-файла."""
     try:
-        path = Path(path)
-        with path.open("r", encoding="utf-8") as f:
-            data = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+        if not os.path.exists(json_path):
+            return []
+
+        if os.path.getsize(json_path) == 0:
+            return []
+
+        with open(json_path, 'r', encoding='utf-8') as json_file:
+            data = json.load(json_file)
+
+        if not isinstance(data, list):
+            return []
+
+        if not all(isinstance(item, dict) for item in data):
+            return []
+
+        return data
+
+    except (json.JSONDecodeError, OSError, UnicodeDecodeError):
         return []
 
-    if isinstance(data, list):
-        return data
-    return []
+    except Exception:
+        return []
