@@ -3,16 +3,8 @@ from typing import Any, Callable, Optional
 
 
 def log(filename: Optional[str] = None):
-    """
-    Декоратор для автоматического логирования выполнения функций.
+    """Декоратор для автоматического логирования выполнения функций."""
 
-    Args:
-        filename (str, optional): Имя файла для записи логов.
-                                 Если None, логи выводятся в консоль.
-
-    Returns:
-        Decorator function
-    """
 
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
@@ -39,8 +31,7 @@ def log(filename: Optional[str] = None):
 
 
 def _write_log(message: str, filename: Optional[str] = None) -> None:
-    """
-        Вспомогательная функция для записи логов в файл или консоль.
+    """Вспомогательная функция для записи логов в файл или консоль.
 
         Args:
             message (str): Сообщение для логирования
