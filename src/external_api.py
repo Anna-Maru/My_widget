@@ -1,20 +1,19 @@
 import os
-from typing import Any, Dict, Optional
-
 import requests
+from typing import Any, Dict, Optional
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
 def get_exchange_rate(currency_code: str) -> Optional[float]:
-    """Получает курс валюты к рублю с помощью Exchange Rates Data API."""
+    """Функция получает курс валюты к рублю с помощью Exchange Rates Data API."""
     api_key = os.getenv("EXCHANGE_RATES_API_KEY")
     if not api_key:
         print("Ошибка: API ключ не найден в переменных окружения")
         return None
 
-    url = "https://api.apilayer.com/exchangerates_data/ latest"
+    url = "https://api.apilayer.com/exchangerates_data/latest"
 
     headers = {
         "apikey": api_key

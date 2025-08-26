@@ -1,9 +1,6 @@
 import pytest
+from unittest.mock import patch, Mock
 
-import requests
-
-
-from unittest.mock import Mock, patch
 from external_api import get_exchange_rate, convert_transaction_to_rub
 
 
@@ -64,8 +61,10 @@ class TestGetExchangeRate:
     @patch("external_api.os.getenv")
     def test_get_exchange_rate_request_exception(self, mock_getenv, mock_requests_get):
         """Тест случая, когда происходит ошибка при запросе."""
+        from requests.exceptions import RequestException
+
         mock_getenv.return_value = "test_api_key"
-        mock_requests_get.side_effect = requests.exceptions.RequestException("Connection error")
+        mock_requests_get.side_effect = RequestException("Connection error")
 
         result = get_exchange_rate("USD")
 
@@ -133,7 +132,7 @@ class TestConvertTransactionToRub:
 
         result = convert_transaction_to_rub(transaction)
 
-        assert result == 4176.725
+        assert result == pytest.approx(4176.725, rel=1e-9)
         mock_get_exchange_rate.assert_called_once_with("EUR")
 
     @patch("external_api.get_exchange_rate")
