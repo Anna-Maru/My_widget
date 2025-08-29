@@ -10,6 +10,7 @@ API_KEY = os.getenv("API_KEY")
 
 
 def convert_to_rub(amount: float, currency: str) -> float:
+    """Конвертирует сумму транзакции в рубли с использованием внешнего API."""
     headers = {"apikey": API_KEY} if API_KEY else {}
     params = {"from": currency, "to": "RUB", "amount": str(amount)}
     resp = requests.get(f'https://apilayer.com/exchangerates_data-api={API_KEY}', headers=headers, params=params)
@@ -19,6 +20,7 @@ def convert_to_rub(amount: float, currency: str) -> float:
 
 
 def get_amount_in_rub(transaction: Dict[str, Any]) -> float:
+    """Возвращает сумму транзакции в рублях."""
     op = transaction.get("operationAmount", {})
     try:
         amount = float(op.get("amount", "0"))
