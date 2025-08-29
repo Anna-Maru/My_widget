@@ -7,13 +7,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
-BASE_URL = "https://api.apilayer.com"
 
 
 def convert_to_rub(amount: float, currency: str) -> float:
     headers = {"apikey": API_KEY} if API_KEY else {}
     params = {"from": currency, "to": "RUB", "amount": str(amount)}
-    resp = requests.get(BASE_URL, headers=headers, params=params)
+    resp = requests.get(f'https://apilayer.com/exchangerates_data-api={API_KEY}', headers=headers, params=params)
     resp.raise_for_status()
     data = resp.json()
     return float(data.get("result", 0.0))
