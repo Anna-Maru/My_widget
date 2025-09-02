@@ -15,19 +15,16 @@ def convert_to_rub(amount: float, currency: str) -> float:
     if currency.upper() == "RUB":
         return float(amount)
 
+    API_KEY = os.getenv("API_KEY")
     if not API_KEY:
         raise RuntimeError("API_KEY is missing.")
 
     headers = {"apikey": API_KEY}
     params = {"from": currency, "to": "RUB", "amount": str(amount)}
-
-    try:
-        resp = requests.get('https://api.apilayer.com/exchangerates_data/convert', headers=headers, params=params)
-        resp.raise_for_status()
-        data = resp.json()
-        return float(data.get("result", 0.0))
-    except requests.RequestException as e:
-        raise RuntimeError(f"Currency conversion failed: {e}") from e
+    resp = requests.get('https://api.apilayer.com/exchangerates_data/convert', headers=headers, params=params)
+    resp.raise_for_status()
+    data = resp.json()
+    return float(data.get("result", 0.0))
 
 
 def get_amount_in_rub(transaction: Dict[str, Any]) -> float:
