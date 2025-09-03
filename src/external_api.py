@@ -1,8 +1,8 @@
 import os
-import requests
 from typing import Any, Dict
-from dotenv import load_dotenv
 
+import requests
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -15,7 +15,6 @@ def convert_to_rub(amount: float, currency: str) -> float:
     if currency.upper() == "RUB":
         return float(amount)
 
-    API_KEY = os.getenv("API_KEY")
     if not API_KEY:
         raise RuntimeError("API_KEY is missing.")
 
