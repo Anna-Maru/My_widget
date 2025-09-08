@@ -1,4 +1,13 @@
+import logging
 from typing import Union
+
+logger = logging.getLogger('masks')
+logger.setLevel(logging.DEBUG)
+
+file_handler = logging.FileHandler("logs/masks.log")
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
 
 
 def get_mask_card_number(number: Union[int, str]) -> str:
@@ -15,16 +24,24 @@ def get_mask_card_number(number: Union[int, str]) -> str:
             str: Строка с замаскированным номером.
                  Если длина строки менее 10 символов после очистки,
                  возвращается строка без изменений."""
-    s = str(number).replace(" ", "")
-    if len(s) < 10:
-        return s
+    try:
+        s = str(number).replace(" ", "")
+        if len(s) < 10:
+            logger.error("Ошибка маскировки карты: номер слишком короткий (%s)", s)
+            return s
 
-    part1 = s[:4]
-    part2 = s[4:6] + "**"
-    part3 = "****"
-    part4 = s[-4:]
+        part1 = s[:4]
+        part2 = s[4:6] + "**"
+        part3 = "****"
+        part4 = s[-4:]
 
-    return f"{part1} {part2} {part3} {part4}"
+        masked = f"{part1} {part2} {part3} {part4}"
+        logger.info("Успешно замаскирован номер карты")
+        return masked
+
+    except Exception as ex:
+        logger.error("Ошибка маскировки номера карты: %s", ex)
+        raise
 
 
 def get_mask_account(number: Union[int, str]) -> str:
@@ -37,8 +54,16 @@ def get_mask_account(number: Union[int, str]) -> str:
         Return:
             str: Строка с замаскированным счётом.
                  Если длина строки ≤4 после очистки, возвращается без изменений."""
-    s = str(number).replace(" ", "")
-    if len(s) <= 4:
-        return s
+    try:
+        s = str(number).replace(" ", "")
+        if len(s) <= 4:
+            logger.error("Короткий номер счёта: %s", s)
+            return s
 
-    return f"**{s[-4:]}"
+        masked = f"**{s[-4:]}"
+        logger.info("Успешно замаскирован номер счёта")
+        return masked
+
+    except Exception as ex:
+        logger.error("Ошибка маскировки номера счёта: %s", ex)
+        raise
