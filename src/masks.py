@@ -3,6 +3,7 @@ from typing import Union
 
 logger = logging.getLogger('masks')
 logger.setLevel(logging.DEBUG)
+
 file_handler = logging.FileHandler("logs/masks.log")
 file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 file_handler.setFormatter(file_formatter)
@@ -26,7 +27,7 @@ def get_mask_card_number(number: Union[int, str]) -> str:
     try:
         s = str(number).replace(" ", "")
         if len(s) < 10:
-            logger.warning("Короткий номер карты: %s", number)
+            logger.error("Ошибка маскировки карты: номер слишком короткий (%s)", s)
             return s
 
         part1 = s[:4]
@@ -56,7 +57,7 @@ def get_mask_account(number: Union[int, str]) -> str:
     try:
         s = str(number).replace(" ", "")
         if len(s) <= 4:
-            logger.warning("Короткий номер счёта: %s", number)
+            logger.error("Короткий номер счёта: %s", s)
             return s
 
         masked = f"**{s[-4:]}"

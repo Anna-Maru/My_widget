@@ -19,7 +19,7 @@ def get_data(json_path: str) -> List[Dict[str, Any]]:
             return []
 
         if os.path.getsize(json_path) == 0:
-            logger.warning("Файл пустой: %s", json_path)
+            logger.error("Файл пустой: %s", json_path)
             return []
 
         with open(json_path, 'r', encoding='utf-8') as json_file:
