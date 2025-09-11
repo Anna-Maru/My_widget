@@ -37,10 +37,10 @@ def test_convert_to_rub_calls_api(monkeypatch):
     assert result == 1500.5
 
 
-def test_convert_to_rub_no_key(monkeypatch):
-    monkeypatch.delenv("API_KEY", raising=False)
-    with pytest.raises(RuntimeError, match="API_KEY is missing"):
-        convert_to_rub(5, "EUR")
+def test_convert_to_rub_no_key():
+    with patch("src.external_api.API_KEY", None):
+        with pytest.raises(RuntimeError, match="API_KEY is missing"):
+            convert_to_rub(5, "EUR")
 
 
 @pytest.mark.parametrize("currency, amount, expected", [
