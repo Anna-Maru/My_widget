@@ -2,7 +2,8 @@
 
 ## Описание:
 
-Удобный виджет для личного кабинета банка, который выводит последние успешные финоперации клиента.
+Удобный виджет для личного кабинета банка, который выводит последние успешные финансовые операции клиента.  
+Поддерживает работу с различными источниками данных и дополнительный функционал по обработке транзакций.
 
 ### Установка
 
@@ -18,7 +19,7 @@ poetry install --with lint,test
 3. Убедитесь, что установлены:
    python 3.15
    Poetry
-   Зависимости: black, isort, flake8, mypy, pytest
+   Зависимости: black, isort, flake8, mypy, pytest, pytest-cov, pandas, openpyxl, requests, python-dotenv
 
 ### Использование
 
@@ -64,6 +65,21 @@ def log(filename: str = None):
 @log("mylog.txt")
 def my_function(x, y):
     return x + y`
+```
+6. Загрузка данных из файлов
+
+Финансовые транзакции теперь можно загружать не только из JSON, но и из CSV и Excel:
+```from src.utils import get_data
+from src.readers import read_csv, read_excel
+
+# JSON
+transactions_json = get_data("data/operations.json")
+
+# CSV
+transactions_csv = read_csv("data/transactions.csv")
+
+# Excel
+transactions_excel = read_excel("data/transactions_excel.xlsx")
 ```
 
 ### Тесты
