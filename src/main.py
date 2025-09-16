@@ -1,9 +1,10 @@
 import sys
-from src.utils import get_data
-from src.readers import read_csv_transactions, read_excel_transactions
-from src.processing import filter_by_state, sort_by_date
+
 from src.generators import filter_by_currency
+from src.processing import filter_by_state, sort_by_date
+from src.readers import read_csv_transactions, read_excel_transactions
 from src.search import process_bank_search
+from src.utils import get_data
 
 
 def main():

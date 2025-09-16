@@ -1,6 +1,7 @@
 import logging
+from typing import Any, Dict, List
+
 import pandas as pd
-from typing import List, Dict, Any
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
