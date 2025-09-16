@@ -27,6 +27,7 @@ def read_csv_transactions(path: str) -> List[Dict[str, Any]]:
         logger.error(f"Ошибка при чтении CSV-файла {path}: {e}")
         return []
 
+
 def read_excel_transactions(path: str) -> List[Dict[str, Any]]:
     """Считывает транзакции из Excel-файла (.xlsx)."""
     try:
