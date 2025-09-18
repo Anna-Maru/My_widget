@@ -1,5 +1,18 @@
 import logging
+from pathlib import Path
 from typing import Union
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+LOG_DIR = BASE_DIR / "logs"
+LOG_FILE = LOG_DIR / "masks.log"
+
+
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+if not LOG_FILE.exists():
+    LOG_FILE.touch()
+
 
 logger = logging.getLogger('masks')
 logger.setLevel(logging.DEBUG)
