@@ -1,16 +1,17 @@
 import json
 import os
-
 import pytest
 
 from src.utils import get_data
+from typing import List, Dict, Any
 
 
 class TestGetData:
 
+
     def test_get_data_valid_file(self, tmp_path):
         """Тест чтения корректного JSON-файла с данными"""
-        test_data = [
+        test_data : List[Dict[str, Any]] = [
             {
                 "id": 123,
                 "state": "EXECUTED",
@@ -93,7 +94,7 @@ class TestGetData:
     def test_get_data_valid_empty_dicts(self, tmp_path):
         """Тест со списком пустых словарей"""
         empty_dicts_file = tmp_path / "empty_dicts.json"
-        test_data = [{}, {}, {}]
+        test_data : List[Dict[str, Any]] = [{}, {}, {}]
         with open(empty_dicts_file, 'w') as f:
             json.dump(test_data, f)
 
@@ -104,7 +105,7 @@ class TestGetData:
     def test_get_data_unicode_content(self, tmp_path):
         """Тест с содержимым на кириллице"""
         unicode_file = tmp_path / "unicode.json"
-        test_data = [
+        test_data : List[Dict[str, Any]] = [
             {
                 "description": "Перевод организации",
                 "from": "Карта 1234",

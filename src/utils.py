@@ -1,8 +1,17 @@
 import json
 import logging
 import os
+from pathlib import Path
 from typing import Any, Dict, List
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+LOG_DIR = BASE_DIR / "logs"
+LOG_FILE = LOG_DIR / "utils.log"
+
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+if not LOG_FILE.exists():
+    LOG_FILE.touch()
 
 logger = logging.getLogger('utils')
 logger.setLevel(logging.DEBUG)
