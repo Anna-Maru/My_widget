@@ -15,7 +15,7 @@ if not LOG_FILE.exists():
 
 logger = logging.getLogger('utils')
 logger.setLevel(logging.DEBUG)
-file_handler = logging.FileHandler("logs/utils.log")
+file_handler = logging.FileHandler(LOG_FILE)
 file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)

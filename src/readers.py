@@ -1,12 +1,21 @@
 import logging
+import pandas as pd
+from pathlib import Path
 from typing import Any, Dict, List
 
-import pandas as pd
+BASE_DIR = Path(__file__).resolve().parent.parent
+LOG_DIR = BASE_DIR / "logs"
+LOG_FILE = LOG_DIR / "readers.log"
+
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+if not LOG_FILE.exists():
+    LOG_FILE.touch()
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-file_handler = logging.FileHandler("logs/readers.log", mode="w", encoding="utf-8")
+file_handler = logging.FileHandler(LOG_FILE)
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
