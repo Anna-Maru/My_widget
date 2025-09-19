@@ -17,15 +17,15 @@ def main():
     choice = input("Ваш выбор: ")
 
     if choice == "1":
-        path = "My_widget/data/operations.json"
+        path = "../data/operations.json"
         data = get_data(path)
         print("Для обработки выбран JSON-файл.")
     elif choice == "2":
-        path = "My_widget/data/transactions.csv"
+        path = "../data/transactions.csv"
         data = read_csv_transactions(path)
         print("Для обработки выбран CSV-файл.")
     elif choice == "3":
-        path = "My_widget/data/transactions_excel.xlsx"
+        path = "../data/transactions_excel.xlsx"
         data = read_excel_transactions(path)
         print("Для обработки выбран XLSX-файл.")
     else:
